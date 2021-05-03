@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "dotenv": "^8.2.0",
     "heroku": "^7.53.0",
+    "knex": "^0.95.4",
     "node-sass": "^5.0.0",
+    "pg": "^8.6.0",
     "sass-loader": "^10.1.1",
     "vue": "^2.6.11"
   },

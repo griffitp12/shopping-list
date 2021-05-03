@@ -2,7 +2,7 @@ exports.up = function (knex) {
     return knex.schema.createTable("items", (table) => {
         table.increments().index();
 
-        table.text("item")
+        table.text("item").notNullable();
     });
 }
 

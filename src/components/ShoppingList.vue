@@ -1,12 +1,15 @@
 <template>
   <div>
-    <input
-      type="text"
-      class="item-input"
-      placeholder="Add new items here"
-      v-model="newItem"
-      @keyup.enter="addItem"
-    />
+    <form>
+      <input
+        type="text"
+        name="itemInput"
+        class="item-input"
+        placeholder="Add new items here"
+        v-model="newItem"
+      />
+      <button for="itemInput" class="input-button" @click="addItem">Add Item</button>
+    </form>
     <div v-for="item in items" :key="item.id" class="shopping-item">
       <p>{{ item.title }}</p>
     </div>
@@ -15,43 +18,47 @@
 
 <script>
 export default {
-  name: 'ShoppingList',
-  data () {
+  name: "ShoppingList",
+
+  data: function () {
     return {
-      newItem: '',
+      newItem: "fafwa",
       idForItem: 4,
       items: [
         {
-          id: 1, 
-          title: 'Bananas',
-          inCart: 'false',
+          id: 1,
+          title: "Bananas",
+          inCart: "false",
         },
         {
-          id: 2, 
-          title: 'Apples',
-          inCart: 'false',
+          id: 2,
+          title: "Apples",
+          inCart: "false",
         },
         {
-          id: 3, 
-          title: 'Milk',
-          inCart: 'false',
-        }
-      ]
-    }
+          id: 3,
+          title: "Milk",
+          inCart: "false",
+        },
+      ],
+    };
   },
 
   methods: {
-    addItem: () => {
-      console.log(this.newItem)
-      /* const itemToAdd = {
+    addItem(e) {
+      e.preventDefault();
+      console.log("addin")
+      const itemToAdd = {
         id: this.idForItem,
         title: this.newItem,
-        inCart: 'false'
-      }; */
-      /* this.items.push(itemToAdd); */
+        inCart: "false",
+      };
+      this.items.push(itemToAdd);
+      this.newItem = "";
+      this.idForItem++;
     },
-  }
-}
+  },
+};
 </script>
 
 

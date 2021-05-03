@@ -8,10 +8,19 @@
         placeholder="Add new items here"
         v-model="newItem"
       />
-      <button for="itemInput" class="input-button" @click="addItem">Add Item</button>
+      <button for="itemInput" class="input-button" @click="addItem">
+        Add Item
+      </button>
     </form>
-    <div v-for="item in items" :key="item.id" class="shopping-item">
-      <p>{{ item.title }}</p>
+    <div
+      v-for="(item, index) in items"
+      :key="item.id"
+      :class="{ incart: inCartTest }"
+      class="shopping-item" 
+    >
+      <p @click="putItemInCart(index)" >
+        {{ item.title }}
+      </p>
     </div>
   </div>
 </template>
@@ -22,8 +31,9 @@ export default {
 
   data: function () {
     return {
-      newItem: "fafwa",
+      newItem: "",
       idForItem: 4,
+      inCartTest: true,
       items: [
         {
           id: 1,
@@ -47,35 +57,65 @@ export default {
   methods: {
     addItem(e) {
       e.preventDefault();
-      console.log("addin")
+
+      if (this.newItem.trim() === "") {
+        this.newItem = "";
+        return;
+      }
+
       const itemToAdd = {
         id: this.idForItem,
         title: this.newItem,
         inCart: "false",
       };
       this.items.push(itemToAdd);
+
       this.newItem = "";
+
       this.idForItem++;
+    },
+
+    putItemInCart(index) {
+      if (this.items[index].inCartTest === false){
+        this.items[index].inCartTest = true
+      } else {
+        this.items[index].inCartTest = false
+      }
+      console.log(this.items[index].inCartTest)
     },
   },
 };
 </script>
 
 
-<style >
+<style lang="scss">
 .item-input {
   width: 100%;
   padding: 10px 18px;
   font-size: 18px;
   margin-bottom: 16px;
-}
 
-.item-input:focus {
-  outline: 0;
+  &:focus {
+    outline: 0;
+  }
 }
 
 .shopping-item {
-  font-size: 22px;
+  font-size: 24px;
   text-align: left;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
+.red {
+  background-color: red;
+}
+
+.incart {
+    text-decoration: line-through;
+}
+
+
 </style>

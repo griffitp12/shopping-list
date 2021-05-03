@@ -6,7 +6,11 @@
     "start": "node server",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "seed": "npx knex --knexfile ./knexfile.js seed:run",
+    "makeMigration": "npx knex --knexfile ./knexfile.js migrate:make ",
+    "migrate": "npx knex --knexfile ./knexfile.js migrate:latest",
+    "rollback": "npx knex --knexfile ./knexfile.js migrate:rollback",
   },
   "dependencies": {
     "core-js": "^3.6.5",

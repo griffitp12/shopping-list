@@ -15,7 +15,7 @@
     <div
       v-for="(item, index) in items"
       :key="item.id"
-      :class="{ incart: inCartTest }"
+      :class="inCartTest ? 'in-cart' : ''"
       class="shopping-item" 
     >
       <p @click="putItemInCart(index)" >
@@ -113,7 +113,7 @@ export default {
   background-color: red;
 }
 
-.incart {
+.in-cart {
     text-decoration: line-through;
 }
 

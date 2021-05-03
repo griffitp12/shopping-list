@@ -15,7 +15,7 @@
     <div
       v-for="(item, index) in items"
       :key="item.id"
-      :class="inCartTest ? 'in-cart' : ''"
+      :class="item.inCart ? 'in-cart' : ''"
       class="shopping-item" 
     >
       <p @click="putItemInCart(index)" >
@@ -33,7 +33,6 @@ export default {
     return {
       newItem: "",
       idForItem: 4,
-      inCartTest: true,
       items: [
         {
           id: 1,
@@ -76,12 +75,13 @@ export default {
     },
 
     putItemInCart(index) {
-      if (this.items[index].inCartTest === false){
-        this.items[index].inCartTest = true
+      console.log(`BEFORE: ${this.items[index].title} inCart: ${this.items[index].inCart}`)
+      if (this.items[index].inCart === false){
+        this.items[index].inCart = true
       } else {
-        this.items[index].inCartTest = false
+        this.items[index].inCart = false
       }
-      console.log(this.items[index].inCartTest)
+      console.log(`AFTER: ${this.items[index].title} inCart: ${this.items[index].inCart}`)
     },
   },
 };
@@ -116,6 +116,5 @@ export default {
 .in-cart {
     text-decoration: line-through;
 }
-
 
 </style>

@@ -21,7 +21,6 @@ const db = require("./knex");
     try {
       console.log("Running migrations");
       await db.migrate.latest();
-      await db.seed.run(); 
       console.log("Starting express");
       app.listen({ port: process.env.PORT || 4000 }, () =>
         console.log(

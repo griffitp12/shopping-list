@@ -21,26 +21,33 @@
       <p @click="putItemInCart(index, item.name)">
         {{ item.name }}
       </p>
-      <div class="change-icon" @click="showModal(index, item.name)">&times;</div>
-      <DeleteModal :selectedItem="selectedItem" v-show="isModalVisible" @close="closeModal()" @deleteClose="closeModalAndDelete(index, index.item)" />
+      <div class="change-icon" @click="showModal(item.id, item.name)">
+        &times;
+      </div>
+      <DeleteModal
+        :selectedItem="selectedItem"
+        v-show="isModalVisible"
+        @close="closeModal()"
+        @deleteClose="closeModalAndDelete(index, index.item)"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import DeleteModal from './DeleteModal.vue'
+import DeleteModal from "./DeleteModal.vue";
 
 export default {
   name: "ShoppingList",
   components: {
-    DeleteModal
+    DeleteModal,
   },
   data: function () {
     return {
       newItem: "",
       items: [],
       isModalVisible: false,
-      selectedItem: {}
+      selectedItem: {},
     };
   },
 
@@ -56,13 +63,16 @@ export default {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             query: `{
-              allItemNames 
+              allItems {
+                name
+                id
+              } 
               }`,
           }),
         })
           .then((res) => res.json())
           .then((res) => {
-            return res.data.allItemNames;
+            return res.data.allItems;
           });
         this.items = this.addItemsFromInitList(initItems);
       } catch (err) {
@@ -72,10 +82,10 @@ export default {
 
     addItemsFromInitList(arr) {
       const result = [];
-      for (let i = 0; i < arr.length; i++) {
+      for (let item of arr) {
         let itemObj = {
-          id: i,
-          name: arr[i],
+          id: item.id,
+          name: item.name,
           inCart: false,
         };
         result.push(itemObj);
@@ -99,17 +109,11 @@ export default {
               addItem(name: "${this.newItem}")
               }`,
           }),
-        })
-        .then((data) => console.log("HERE IS DATA",data))
+        });
       } catch (err) {
         console.error(err);
       }
-      const itemToAdd = {
-        id: this.items.length,
-        name: this.newItem,
-        inCart: false,
-      };
-      this.items.push(itemToAdd);
+      this.loadItems();
       this.newItem = "";
       this.idForItem++;
     },
@@ -122,20 +126,34 @@ export default {
       }
     },
 
-    showModal(index, item) {
+    showModal(id, item) {
       this.selectedItem.name = item;
-      this.selectedItem.index = index
-      this.isModalVisible = true;    
+      this.selectedItem.id = id;
+      this.isModalVisible = true;
     },
 
     closeModal() {
-      this.isModalVisible = false
+      this.isModalVisible = false;
+      this.selectedItem = {};
     },
 
-    closeModalAndDelete() {
-      let index = this.selectedItem.index
+    async closeModalAndDelete() {
       this.isModalVisible = false;
-      this.items.splice(index, 1);
+      try {
+        await fetch("/graphql?", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: `mutation {
+              removeItem(id: ${this.selectedItem.id} name: "${this.selectedItem.name}")
+              }`,
+          }),
+        });
+      } catch (err) {
+        console.error(err);
+      }
+      this.loadItems();
+      this.selectedItem = {};
     },
   },
 };

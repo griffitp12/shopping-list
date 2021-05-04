@@ -8,11 +8,12 @@ const typeDefs = gql`
 
   type Item {
       name: String!
+      id: Int!
   }
 
   type Mutation {
      addItem(name: String!): String
-     removeItem(name: String!): String
+     removeItem(id: Int! name: String!): String
   }
 `;
 

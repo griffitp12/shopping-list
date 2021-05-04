@@ -11,17 +11,26 @@ const resolvers = {
                     return dataArray
                 });
         },
+        allItems: () => {
+            return db
+                .select("*")
+                .from("items")
+                .then((data) => {
+                    return data
+                });
+        },
     },
     Mutation: {
         addItem: (parent, args) => {
+            console.log("Name:", args.name)
             return db('items')
                 .insert({ name: args.name })
                 .then(() => { return `${args.name} added!` })
         },
         removeItem: (parent, args) => {
+            console.log("ID:", args.id)
             return db('items')
-                .where({ name: args.name })
-                .first()
+                .where({ id: args.id })
                 .del()
                 .then(() => { return `${args.name} removed!` })
         }

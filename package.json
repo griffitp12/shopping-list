@@ -3,15 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "",
-    "serve": "vue-cli-service serve",
+    "psql": "psql -U postgres",
+    "start": "node server",
+    "backServe": "nodemon server",
+    "frontServe": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "makeSeed": "npx knex --knexfile ./knexfile.js seed:make",
+    "seed": "npx knex --knexfile ./knexfile.js seed:run",
+    "makeMigration": "npx knex --knexfile ./knexfile.js migrate:make ",
+    "migrate": "npx knex --knexfile ./knexfile.js migrate:latest",
+    "rollback": "npx knex --knexfile ./knexfile.js migrate:rollback"
   },
   "dependencies": {
+    "apollo-server-express": "^2.24.0",
     "core-js": "^3.6.5",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.5.0",
     "heroku": "^7.53.0",
+    "knex": "^0.95.4",
     "node-sass": "^5.0.0",
+    "nodemon": "^2.0.7",
+    "pg": "^8.6.0",
     "sass-loader": "^10.1.1",
     "vue": "^2.6.11"
   },

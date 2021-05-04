@@ -18,11 +18,11 @@
       :class="item.inCart ? 'in-cart' : ''"
       class="shopping-item"
     >
-      <p @click="putItemInCart(index)">
+      <p @click="putItemInCart(index, item.name)">
         {{ item.name }}
       </p>
-      <div class="change-icon" @click="showModal()">&times;</div>
-      <DeleteModal v-show="isModalVisible" @close="closeModal" />
+      <div class="change-icon" @click="showModal(index, item.name)">&times;</div>
+      <DeleteModal v-show="isModalVisible" @close="closeModal()" @deleteClose="closeModalAndDelete(index, index.item)" />
     </div>
   </div>
 </template>
@@ -40,6 +40,7 @@ export default {
       newItem: "",
       items: [],
       isModalVisible: false,
+      selectedItem: {}
     };
   },
 
@@ -120,11 +121,20 @@ export default {
       }
     },
 
-    showModal() {
-      this.isModalVisible = true;
+    showModal(index, item) {
+      this.selectedItem.name = item;
+      this.selectedItem.index = index
+      this.isModalVisible = true;    
     },
+
     closeModal() {
+      this.isModalVisible = false
+    },
+
+    closeModalAndDelete() {
+      let index = this.selectedItem.index
       this.isModalVisible = false;
+      this.items.splice(index, 1);
     },
   },
 };

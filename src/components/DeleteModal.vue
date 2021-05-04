@@ -12,7 +12,9 @@
         </section>
 
         <footer class="modal-footer">
-          <button type="button" class="btn-red" @click="close">Yah</button>
+          <button type="button" class="btn-red" @click="deleteClose">
+            Yah
+          </button>
           <button type="button" class="btn-green" @click="close">Nah</button>
         </footer>
       </div>
@@ -26,6 +28,9 @@ export default {
   methods: {
     close() {
       this.$emit("close");
+    },
+    deleteClose() {
+      this.$emit("deleteClose");
     },
   },
 };
@@ -105,13 +110,13 @@ export default {
   border-radius: 2px;
 }
 
- .modal-fade-enter,
-  .modal-fade-leave-to {
-    opacity: 0;
-  }
+.modal-fade-enter,
+.modal-fade-leave-to {
+  opacity: 0;
+}
 
-  .modal-fade-enter-active,
-  .modal-fade-leave-active {
-    transition: opacity .5s ease;
-  }
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
 </style>

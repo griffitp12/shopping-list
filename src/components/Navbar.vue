@@ -1,6 +1,6 @@
 <template>
     <div class="navbar">
-        <p class="title">Shopping List</p>
+        <p class="title">Meg's List</p>
     </div>
 </template>
 

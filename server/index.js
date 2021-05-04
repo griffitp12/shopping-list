@@ -8,6 +8,11 @@ const express = require("express");
 const app = express();
 server.applyMiddleware({ app });
 
+/* app.use(cors()); */
+
+app.use(express.static("../public"));
+/* app.use(express.static(path.resolve(__dirname, "..", "dist"))); */
+
 
 const db = require("./knex");
 

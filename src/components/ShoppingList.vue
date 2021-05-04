@@ -85,7 +85,7 @@ export default {
       const itemToAdd = {
         id: this.idForItem,
         name: this.newItem,
-        inCart: "false",
+        inCart: false,
       };
       this.items.push(itemToAdd);
       this.newItem = "";

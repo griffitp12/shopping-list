@@ -16,10 +16,10 @@
       v-for="(item, index) in items"
       :key="item.id"
       :class="item.inCart ? 'in-cart' : ''"
-      class="shopping-item" 
+      class="shopping-item"
     >
-      <p @click="putItemInCart(index)" >
-        {{ item.title }}
+      <p @click="putItemInCart(index)">
+        {{ item.name }}
       </p>
     </div>
   </div>
@@ -33,55 +33,71 @@ export default {
     return {
       newItem: "",
       idForItem: 4,
-      items: [
-        {
-          id: 1,
-          title: "Bananas",
-          inCart: "false",
-        },
-        {
-          id: 2,
-          title: "Apples",
-          inCart: "false",
-        },
-        {
-          id: 3,
-          title: "Milk",
-          inCart: "false",
-        },
-      ],
+      items: [],
     };
   },
 
+  mounted() {
+    this.loadItems();
+  },
+
   methods: {
+    async loadItems() {
+      try {
+        const initItems = await fetch("/graphql?", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: `{
+              allItemNames 
+              }`,
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            return res.data.allItemNames;
+          });
+        this.items = this.addItemsFromInitList(initItems)
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    addItemsFromInitList(arr) {
+      const result = []
+      for (let i = 0; i < arr.length; i++) {
+        let itemObj = {
+          id: i,
+          name: arr[i],
+          inCart: false,
+        }
+        result.push(itemObj);
+      }
+      return result
+    },
+
     addItem(e) {
       e.preventDefault();
-
       if (this.newItem.trim() === "") {
         this.newItem = "";
         return;
       }
-
       const itemToAdd = {
         id: this.idForItem,
-        title: this.newItem,
+        name: this.newItem,
         inCart: "false",
       };
       this.items.push(itemToAdd);
-
       this.newItem = "";
-
       this.idForItem++;
     },
 
     putItemInCart(index) {
-      console.log(`BEFORE: ${this.items[index].title} inCart: ${this.items[index].inCart}`)
-      if (this.items[index].inCart === false){
-        this.items[index].inCart = true
+      if (this.items[index].inCart === false) {
+        this.items[index].inCart = true;
       } else {
-        this.items[index].inCart = false
+        this.items[index].inCart = false;
       }
-      console.log(`AFTER: ${this.items[index].title} inCart: ${this.items[index].inCart}`)
     },
   },
 };
@@ -114,7 +130,6 @@ export default {
 }
 
 .in-cart {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
-
 </style>

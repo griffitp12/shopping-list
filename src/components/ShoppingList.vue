@@ -22,7 +22,7 @@
         {{ item.name }}
       </p>
       <div class="change-icon" @click="showModal(index, item.name)">&times;</div>
-      <DeleteModal v-show="isModalVisible" @close="closeModal()" @deleteClose="closeModalAndDelete(index, index.item)" />
+      <DeleteModal :selectedItem="selectedItem" v-show="isModalVisible" @close="closeModal()" @deleteClose="closeModalAndDelete(index, index.item)" />
     </div>
   </div>
 </template>

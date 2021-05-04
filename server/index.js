@@ -5,9 +5,9 @@ const { ApolloServer } = require('apollo-server-express');
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const express = require("express");
-app.use(express.static("../public"));
 const app = express();
 
+app.use(express.static("../public"));
 server.applyMiddleware({ app });
 
 /* app.use(cors()); */

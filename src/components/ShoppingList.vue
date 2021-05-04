@@ -32,7 +32,6 @@ export default {
   data: function () {
     return {
       newItem: "",
-      idForItem: 4,
       items: [],
     };
   },
@@ -76,20 +75,34 @@ export default {
       return result
     },
 
-    addItem(e) {
+    async addItem(e) {
       e.preventDefault();
       if (this.newItem.trim() === "") {
         this.newItem = "";
         return;
       }
+      
+      try {
+        await fetch("/graphql?", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: `mutation{
+              addItem(name: ${this.newItem})
+              }`,
+          }),
+        })
+      } catch (err) {
+        console.error(err);
+      }
       const itemToAdd = {
-        id: this.idForItem,
+        id: this.items.length,
         name: this.newItem,
         inCart: false,
       };
       this.items.push(itemToAdd);
       this.newItem = "";
-      this.idForItem++;
+      this.idForItem ++;
     },
 
     putItemInCart(index) {

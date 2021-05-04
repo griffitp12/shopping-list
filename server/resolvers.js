@@ -15,11 +15,7 @@ const resolvers = {
     Mutation: {
         addItem: (parent, args) => {
              return db('items')
-                .insert({name: args.name})
-                .then((data) => {
-                    console.log(data)
-                    return data
-                })
+                .insert({name: args.name});
         }
     }
 };

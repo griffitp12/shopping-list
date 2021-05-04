@@ -95,11 +95,12 @@ export default {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            query: `mutation{
-              addItem(name: ${this.newItem})
+            query: `mutation {
+              addItem(name: "${this.newItem}")
               }`,
           }),
-        });
+        })
+        .then((data) => console.log("HERE IS DATA",data))
       } catch (err) {
         console.error(err);
       }

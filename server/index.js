@@ -7,12 +7,13 @@ const server = new ApolloServer({ typeDefs, resolvers });
 const express = require("express");
 const app = express();
 
-app.use(express.static("../public"));
+const path = require('path');
+const publicPath = path.resolve("public/index.html");
+console.log(publicPath);
+app.use(express.static(path.resolve(publicPath)));
 server.applyMiddleware({ app });
 
 /* app.use(cors()); */
-
-
 
 const db = require("./knex");
 

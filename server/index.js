@@ -1,15 +1,15 @@
 require("dotenv").config();
-const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
+const { ApolloServer } = require('apollo-server-express');
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const express = require("express");
 const app = express();
 server.applyMiddleware({ app });
+
+
 const db = require("./knex");
-
-
 
 (async () => {
     try {

@@ -21,6 +21,7 @@ const resolvers = {
         removeItem: (parent, args) => {
             return db('items')
                 .where({ name: args.name })
+                .first()
                 .del()
                 .then(() => { return `${args.name} removed!` })
         }

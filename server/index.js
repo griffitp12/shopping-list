@@ -5,12 +5,14 @@ const { ApolloServer } = require('apollo-server-express');
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const express = require("express");
+app.use(express.static("../public"));
 const app = express();
+
 server.applyMiddleware({ app });
 
 /* app.use(cors()); */
 
-app.use(express.static("../public"));
+
 
 const db = require("./knex");
 

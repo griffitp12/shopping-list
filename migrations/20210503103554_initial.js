@@ -2,10 +2,10 @@ exports.up = function (knex) {
     return knex.schema.createTable("items", (table) => {
         table.increments().index();
 
-        table.text("item").notNullable();
+        table.text("name").notNullable();
     });
 }
 
-exports.down = function (knex, Promise) {
+exports.down = function (knex,) {
     return knex.schema.dropTableIfExists("items");
 };

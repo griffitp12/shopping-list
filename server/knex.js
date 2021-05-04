@@ -1,5 +1,5 @@
 require("dotenv").config();
-import knex from "knex";
+const knex = require("knex");
 
 const db = knex({
   client: "pg",
@@ -19,4 +19,4 @@ const db = knex({
   searchPath: "public",
 });
 
-export default db;
+module.exports = db;

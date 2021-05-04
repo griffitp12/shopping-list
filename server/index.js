@@ -3,11 +3,10 @@ const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
 const server = new ApolloServer({ typeDefs, resolvers });
-server.applyMiddleware({ app });
-
 
 const express = require("express");
 const app = express();
+server.applyMiddleware({ app });
 const db = require("./knex");
 
 
@@ -18,7 +17,7 @@ const db = require("./knex");
       await db.migrate.latest();
       await db.seed.run(); 
       console.log("Starting express");
-      server.listen({ port: process.env.PORT || 4000 }, () =>
+      app.listen({ port: process.env.PORT || 4000 }, () =>
         console.log(
           `Express server listening on port ${process.env.PORT || 4000}`
         )

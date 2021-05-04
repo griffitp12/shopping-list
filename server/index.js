@@ -8,7 +8,7 @@ const express = require("express");
 const app = express();
 
 const path = require('path');
-const publicPath = path.resolve("public/index.html");
+const publicPath = path.resolve("dist");
 console.log(publicPath);
 app.use(express.static(path.resolve(publicPath)));
 server.applyMiddleware({ app });

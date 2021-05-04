@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <form>
       <input
         type="text"
@@ -21,6 +21,7 @@
       <p @click="putItemInCart(index)">
         {{ item.name }}
       </p>
+      <div class="change-icon">≜</div>
     </div>
   </div>
 </template>
@@ -118,15 +119,26 @@ export default {
 
 
 <style lang="scss">
+.main {
+  margin-top: 60px;
+}
 .item-input {
-  width: 100%;
-  padding: 10px 18px;
+  width: 75%;
+  height: 45px;
+  padding: 0px auto 0pc auto;
   font-size: 18px;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 
   &:focus {
     outline: 0;
   }
+}
+
+.input-button {
+  border-top: 2px;
+  width: 25%;
+  height: 45px;
+  padding: 0px auto 0pc auto;
 }
 
 .shopping-item {
@@ -136,9 +148,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid red;
 }
 
-.red {
+.change-icon {
   background-color: red;
 }
 

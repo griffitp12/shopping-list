@@ -13,9 +13,13 @@
 <style scoped>
 .navbar {
     background-color: blue;
-    height: 10%;
+    overflow: hidden;
     width: 100%;
     top: 0;
-    margin: 0 auto;
+    position: fixed;
+}
+
+.title {
+    text-align: center;
 }
 </style>

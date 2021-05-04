@@ -17,6 +17,12 @@ const resolvers = {
             return db('items')
                 .insert({ name: args.name })
                 .then(() => { return `${args.name} added!` })
+        },
+        removeItem: (parent, args) => {
+            return db('items')
+                .where({ name: args.name })
+                .del()
+                .then(() => { return `${args.name} removed!` })
         }
     }
 };

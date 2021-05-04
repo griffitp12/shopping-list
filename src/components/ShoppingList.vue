@@ -144,7 +144,7 @@ export default {
 
 <style lang="scss">
 .main {
-  margin-top: 60px;
+  margin-top: 70px;
 }
 .item-input {
   width: 75%;

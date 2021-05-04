@@ -29,10 +29,15 @@ export default {
   box-sizing: border-box;
 }
 
-.container {
-  margin: 0 auto;
+body {
+  margin: 0;
   background-color: rgb(172, 172, 80)
 }
+
+/* .container {
+  margin: 0 auto;
+  
+} */
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

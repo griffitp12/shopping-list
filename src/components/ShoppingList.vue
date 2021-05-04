@@ -21,19 +21,25 @@
       <p @click="putItemInCart(index)">
         {{ item.name }}
       </p>
-      <div class="change-icon">≜</div>
+      <div class="change-icon" @click="showModal()">&times;</div>
+      <DeleteModal v-show="isModalVisible" @close="closeModal" />
     </div>
   </div>
 </template>
 
 <script>
+import DeleteModal from './DeleteModal.vue'
+
 export default {
   name: "ShoppingList",
-
+  components: {
+    DeleteModal
+  },
   data: function () {
     return {
       newItem: "",
       items: [],
+      isModalVisible: false,
     };
   },
 
@@ -57,23 +63,23 @@ export default {
           .then((res) => {
             return res.data.allItemNames;
           });
-        this.items = this.addItemsFromInitList(initItems)
+        this.items = this.addItemsFromInitList(initItems);
       } catch (err) {
         console.error(err);
       }
     },
 
     addItemsFromInitList(arr) {
-      const result = []
+      const result = [];
       for (let i = 0; i < arr.length; i++) {
         let itemObj = {
           id: i,
           name: arr[i],
           inCart: false,
-        }
+        };
         result.push(itemObj);
       }
-      return result
+      return result;
     },
 
     async addItem(e) {
@@ -82,7 +88,7 @@ export default {
         this.newItem = "";
         return;
       }
-      
+
       try {
         await fetch("/graphql?", {
           method: "POST",
@@ -92,7 +98,7 @@ export default {
               addItem(name: ${this.newItem})
               }`,
           }),
-        })
+        });
       } catch (err) {
         console.error(err);
       }
@@ -103,7 +109,7 @@ export default {
       };
       this.items.push(itemToAdd);
       this.newItem = "";
-      this.idForItem ++;
+      this.idForItem++;
     },
 
     putItemInCart(index) {
@@ -112,6 +118,13 @@ export default {
       } else {
         this.items[index].inCart = false;
       }
+    },
+
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
     },
   },
 };
@@ -149,10 +162,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   border: 1px solid red;
-}
-
-.change-icon {
-  background-color: red;
+  padding-inline: 10px;
 }
 
 .in-cart {

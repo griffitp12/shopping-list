@@ -21,5 +21,7 @@
 
 .title {
     text-align: center;
+    color: white;
+    font-size: 20px;
 }
 </style>

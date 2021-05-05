@@ -174,18 +174,13 @@ export default {
     padding: 2px auto 2px auto;
     margin: 0.1em auto 0.1em auto;
     height: 35px;
-    /* the following ensures they're all using the same box-model for rendering */
-    -moz-box-sizing: content-box; /* or `border-box` */
+    -moz-box-sizing: content-box;
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
 }
 
 .item-input {
   width: 65%;
-  /* height: 45px;
-  padding: 0px auto 0pc auto; */
-  /* font-size: 18px; */
-  /* margin-bottom: 16px; */
 
   &:focus {
     outline: 0;
@@ -200,6 +195,7 @@ export default {
 }
 
 .shopping-item {
+  color: black;
   font-size: 16px;
   font-weight: bold;
   text-align: left;
@@ -208,7 +204,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px dotted rgb(82, 81, 81);
-  padding-inline: 20px;
+  padding-inline: 40px;
 }
 
 .in-cart {

@@ -1,27 +1,47 @@
 <template>
   <div id="app" class="container">
-    <Navbar/>
-    <ShoppingList/>
+    <Navbar @hamburgerClicked="toggleIsHamburgerClicked" />
+    <div class="sidebar" :class="this.isHamburgerClicked ? 'sidebar-slid' : ''">
+      <transition name="slide">
+        <div class="sidebar-panel">
+          <slot></slot>
+        </div>
+      </transition>
+      <div
+        class="sidebar-backdrop"
+        @click="closeSidebarPanel"
+        v-if="isPanelOpen"
+      ></div>
+    </div>
+    <ShoppingList />
   </div>
 </template>
 
 <script>
-import ShoppingList from './components/ShoppingList.vue'
-import Navbar from './components/Navbar.vue'
+import ShoppingList from "./components/ShoppingList.vue";
+import Navbar from "./components/Navbar.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Navbar,
-    ShoppingList
+    ShoppingList,
   },
 
-  data: function() {
+  data: function () {
     return {
-      listItems: []
+      listItems: [],
+      isHamburgerClicked: false,
+    };
+  },
+
+  methods: {
+      toggleIsHamburgerClicked() {
+        console.log("isHamburgerClicked?")
+        this.isHamburgerClicked = true
+      }
     }
-  }
-}
+};
 </script>
 
 <style>
@@ -31,13 +51,22 @@ export default {
 
 body {
   margin: 0;
-  background-color: rgb(172, 172, 80)
+  background-color: rgb(172, 172, 80);
 }
 
-/* .container {
-  margin: 0 auto;
-  
-} */
+.sidebar {
+  background-color: black;
+  left: -70%;
+  width: 70vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  transition: ease-in-out 1s
+}
+
+.sidebar-slid {
+  left: 0;
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

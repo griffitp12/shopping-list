@@ -1,9 +1,9 @@
 <template>
   <div class="navbar">
-    <SideMenu
+    <!-- <SideMenu
       :isHamburgerClicked="isHamburgerClicked"
       @sidebarClosed="toggleIsHamburgerClicked"
-    />
+    /> -->
     <div class="hamburger-menu" @click="showSidebar">
       <div class="bun1"></div>
       <div class="patty"></div>
@@ -14,22 +14,22 @@
 </template>
 
 <script>
-import SideMenu from "./SideMenu.vue";
+/* import SideMenu from "./SideMenu.vue"; */
 
 export default {
   name: "Navbar",
   components: {
-    SideMenu,
+    /* SideMenu, */
   },
   data: function () {
     return {
-      isHamburgerClicked: false,
+      
     };
   },
 
   methods: {
     showSidebar() {
-      this.isHamburgerClicked = true;
+      this.$emit("hamburgerClicked")
     },
     toggleIsHamburgerClicked() {
       this.isHamburgerClicked = false;

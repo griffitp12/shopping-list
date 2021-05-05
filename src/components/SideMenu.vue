@@ -29,46 +29,6 @@ export default {
 </script>
 
 <style>
-
-.slide-enter-active {
-  transition: transform 1s ease-in-out;
-  transform: translateX(100%);
-}
-
-.slide-leave-active {
-  transition: transform 1s ease-in-out;
-  transform: translateX(0%);
-}
-
-.slide-enter {
-}
-
-.slide-leave-to {
-  /* transform: translateX(-100%);
-  transition: all 1s ease-in 1s; */
-}
-
-/*     .modal-fade-enter,
-.modal-fade-leave-to {
-  opacity: 0;
-} */
-
-/* .modal-fade-enter-active,
-.modal-fade-leave-active {
-  transition: opacity .5s ease;
-} */
-
-/* .slide-enter-active,
-.slide-leave-active {
-  transition: transform 1s ease;
-}
-
-.slide-enter,
-.slide-leave-to {
-  transform: translateX(-100%);
-  transition: all 1s ease-in 1s;
-} */
-
 .sidebar-backdrop {
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;

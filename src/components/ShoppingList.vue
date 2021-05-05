@@ -190,7 +190,7 @@ export default {
 .input-button {
   border-radius: 0;
   border: 0;
-  width: 25%;
+  width: 20%;
   padding: 0px auto 0pc auto;
 }
 
@@ -204,7 +204,8 @@ export default {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px dotted rgb(82, 81, 81);
-  padding-inline: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .in-cart {

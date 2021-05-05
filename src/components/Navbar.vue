@@ -1,12 +1,15 @@
 <template>
   <div class="navbar">
-    <SideMenu v-show="isHamburgerClicked" />
+    <SideMenu
+      :isHamburgerClicked="isHamburgerClicked"
+      @sidebarClosed="toggleIsHamburgerClicked"
+    />
     <div class="hamburger-menu" @click="showSidebar">
       <div class="bun1"></div>
       <div class="patty"></div>
       <div class="bun2"></div>
     </div>
-    <p class="title">Meg's List</p>
+    <p class="title">Shopping List</p>
   </div>
 </template>
 
@@ -26,8 +29,10 @@ export default {
 
   methods: {
     showSidebar() {
-        console.log("hamburger clicked", this.isHamburgerVisible)
-      this.isHamburgerVisible = true;
+      this.isHamburgerClicked = true;
+    },
+    toggleIsHamburgerClicked() {
+      this.isHamburgerClicked = false;
     },
   },
 };

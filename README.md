@@ -1,4 +1,4 @@
-This app was created during my time as students at Code Chrysalis
+This app was created during my time as a student at Code Chrysalis
 
 # Shopping List -  a simple, fullstack shopping list tool.
 

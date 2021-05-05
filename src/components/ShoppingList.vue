@@ -40,6 +40,7 @@ export default {
   components: {
     DeleteModal,
   },
+  props: ["clearSignal"],
   data: function () {
     return {
       newItem: "",
@@ -206,7 +207,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid red;
+  border-bottom: 1px dotted rgb(82, 81, 81);
   padding-inline: 20px;
 }
 

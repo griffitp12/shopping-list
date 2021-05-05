@@ -7,14 +7,14 @@
         </header>
 
         <section class="modal-body">
-          <slot name="body"> </slot>
+          <slot name="body">{{this.selectedItem.name}}</slot>
         </section>
 
         <footer class="modal-footer">
           <button type="button" class="btn-red" @click="deleteClose">
             Yah
           </button>
-          <button type="button" class="btn-green" @click="close">Nah</button>
+          <button type="button" class="btn-gray" @click="close">Nah</button>
         </footer>
       </div>
     </div>
@@ -24,6 +24,15 @@
 <script>
 export default {
   name: "DeleteModal",
+  data: function () {
+    return {
+      itemName: ""
+    };
+  }, 
+  created() {
+    this.itemName = this.selectedItem.name
+  },
+  props: ["selectedItem"],
   methods: {
     close() {
       this.$emit("close");
@@ -65,7 +74,14 @@ export default {
 .modal-header {
   position: relative;
   border-bottom: 1px solid #eeeeee;
-  color: #4aae9b;
+  color: #550C18;
+  justify-content: space-between;
+}
+
+.modal-body {
+  position: relative;
+  border-bottom: 1px solid #eeeeee;
+  color: #550C18;
   justify-content: space-between;
 }
 
@@ -95,17 +111,17 @@ export default {
   color: white;
   width: 45%;
   float: left;
-  background: #97573e;
-  border: 1px solid #4aae9b;
+  background: #550C18;
+  border: 2px solid black;
   border-radius: 2px;
 }
 
-.btn-green {
+.btn-gray {
   color: white;
   width: 45%;
   margin-left: auto;
-  background: #4aae9b;
-  border: 1px solid #4aae9b;
+  background: #443730;
+  border: 2px solid black;
   border-radius: 2px;
 }
 

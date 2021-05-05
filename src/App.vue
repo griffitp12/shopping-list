@@ -1,46 +1,48 @@
 <template>
   <div id="app" class="container">
     <Navbar @hamburgerClicked="toggleIsHamburgerClicked" />
-    <div class="sidebar" :class="this.isHamburgerClicked ? 'sidebar-slid' : ''">
-      <transition name="slide">
-        <div class="sidebar-panel">
-          <slot></slot>
-        </div>
-      </transition>
-      <div
-        class="sidebar-backdrop"
-        @click="closeSidebarPanel"
-        v-if="isPanelOpen"
-      ></div>
-    </div>
-    <ShoppingList />
+    <SideMenu
+      v-show="isHamburgerClicked"
+      :isHamburgerClicked="isHamburgerClicked"
+      @closeSidebarPlease="toggleIsHamburgerClicked"
+      @clearInCartItemsPlease="clearInCartItems"
+    />
+    <ShoppingList :clearSignal="sentClearSignal" />
   </div>
 </template>
 
 <script>
 import ShoppingList from "./components/ShoppingList.vue";
 import Navbar from "./components/Navbar.vue";
+import SideMenu from "./components/SideMenu.vue";
 
 export default {
   name: "App",
   components: {
     Navbar,
     ShoppingList,
+    SideMenu,
   },
 
   data: function () {
     return {
-      listItems: [],
       isHamburgerClicked: false,
+      sentClearSignal: false
     };
   },
 
   methods: {
-      toggleIsHamburgerClicked() {
-        console.log("isHamburgerClicked?")
-        this.isHamburgerClicked = true
+    toggleIsHamburgerClicked() {
+      if (this.isHamburgerClicked === true) {
+        this.isHamburgerClicked = false;
+      } else {
+        this.isHamburgerClicked = true;
       }
+    },
+    clearInCartItems() {
+      this.sentClearSignal = true
     }
+  },
 };
 </script>
 
@@ -51,21 +53,7 @@ export default {
 
 body {
   margin: 0;
-  background-color: rgb(172, 172, 80);
-}
-
-.sidebar {
-  background-color: black;
-  left: -70%;
-  width: 70vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  transition: ease-in-out 1s
-}
-
-.sidebar-slid {
-  left: 0;
+  background-color: #A5907E;
 }
 
 #app {

@@ -1,15 +1,11 @@
 <template>
   <div class="navbar">
-    <!-- <SideMenu
-      :isHamburgerClicked="isHamburgerClicked"
-      @sidebarClosed="toggleIsHamburgerClicked"
-    /> -->
-    <div class="hamburger-menu" @click="showSidebar">
+    <p class="title">Shopping List</p>
+    <div class="hamburger-menu" @click="emitHamburgerClicked">
       <div class="bun1"></div>
       <div class="patty"></div>
       <div class="bun2"></div>
     </div>
-    <p class="title">Shopping List</p>
   </div>
 </template>
 
@@ -18,21 +14,14 @@
 
 export default {
   name: "Navbar",
-  components: {
-    /* SideMenu, */
-  },
+  components: {},
   data: function () {
-    return {
-      
-    };
+    return {};
   },
 
   methods: {
-    showSidebar() {
-      this.$emit("hamburgerClicked")
-    },
-    toggleIsHamburgerClicked() {
-      this.isHamburgerClicked = false;
+    emitHamburgerClicked() {
+      this.$emit("hamburgerClicked");
     },
   },
 };
@@ -40,7 +29,7 @@ export default {
 
 <style scoped>
 .navbar {
-  background-color: blue;
+  background-color: #550c18;
   overflow: hidden;
   width: 100%;
   top: 0;
@@ -49,9 +38,10 @@ export default {
 
 .hamburger-menu {
   color: white;
-  display: inline-block;
   cursor: pointer;
-  left: 5px;
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 .bun1,
@@ -68,6 +58,7 @@ export default {
   display: inline-block;
   text-align: center;
   color: white;
-  font-size: 20px;
+  font-size: 30px;
+  margin: 12px
 }
 </style>

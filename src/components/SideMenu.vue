@@ -3,13 +3,16 @@
     <transition name="slide">
       <div class="sidebar-panel">
         <section class="menu-item not-yet">
-          <slot>Login (coming soon)</slot>
+          <slot>Login <span class="coming-soon">(coming soon)</span></slot>
         </section>
         <section class="menu-item not-yet">
-          <slot @click="sendClearSignal">Clear inCart Items (coming soon)</slot>
+          <slot @click="sendClearSignal"
+            >Clear inCart Items
+            <span class="coming-soon">(coming soon)</span></slot
+          >
         </section>
         <section class="menu-item not-yet">
-          <slot>FAQ (coming later)</slot>
+          <slot>FAQ <span class="coming-soon">(coming soon)</span></slot>
         </section>
       </div>
     </transition>
@@ -48,6 +51,9 @@ export default {
 
 .not-yet {
   color: red;
+}
+.coming-soon {
+  font-size: 14px;
 }
 
 .sidebar-backdrop {

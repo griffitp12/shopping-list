@@ -17,7 +17,7 @@ Note: **Shopping List** was built with mobile users in mind, and probably looks 
 ## Overall repo structure
 * Configuration files are in the `root` folder.
 * Initial seeding data (in a JSON file) is located in the `data` folder. This is only for testing, and never runs automatically
-* In the `migrations` folder is the initial PSQL database migration (it's a very simple database
+* In the `migrations` folder is the initial PSQL database migration (it's a very simple database)
 * In the `server` folder are located all the files necessary to the back-end node server
 * In the `src` file are located all the source files related with the `client` 
 

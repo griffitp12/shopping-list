@@ -1,24 +1,22 @@
 <template>
   <div class="main">
-    <form>
-      <input
-        type="text"
-        name="itemInput"
-        class="item-input"
-        placeholder="Add new items here"
-        v-model="newItem"
-      />
-      <button for="itemInput" class="input-button" @click="addItem">
-        Add Item
-      </button>
-    </form>
-    <div
-      v-for="(item, index) in items"
-      :key="item.id"
-      :class="item.inCart ? 'in-cart' : ''"
-      class="shopping-item"
-    >
-      <p @click="putItemInCart(index, item.name)">
+      <form class="input-button-field">
+        <input
+          type="text"
+          name="itemInput"
+          class="item-input"
+          placeholder="Add new items here"
+          v-model="newItem"
+        />
+        <button for="itemInput" class="input-button" @click="addNewItem">
+          Add Item
+        </button>
+      </form>
+    <div v-for="(item, index) in items" :key="item.id" class="shopping-item">
+      <p
+        :class="item.inCart ? 'in-cart' : ''"
+        @click="putItemInCart(index, item.name)"
+      >
         {{ item.name }}
       </p>
       <div class="change-icon" @click="showModal(item.id, item.name)">
@@ -93,7 +91,7 @@ export default {
       return result;
     },
 
-    async addItem(e) {
+    async addNewItem(e) {
       e.preventDefault();
       if (this.newItem.trim() === "") {
         this.newItem = "";
@@ -164,11 +162,28 @@ export default {
 .main {
   margin-top: 70px;
 }
+
+.input-button-field {
+  font-size: 1em;
+  padding: 0.1em;
+}
+
+.item-input, .input-button {
+    font-size: inherit;
+    padding: 2px auto 2px auto;
+    margin: 0.1em auto 0.1em auto;
+    height: 35px;
+    /* the following ensures they're all using the same box-model for rendering */
+    -moz-box-sizing: content-box; /* or `border-box` */
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
 .item-input {
-  width: 75%;
-  height: 45px;
-  padding: 0px auto 0pc auto;
-  font-size: 18px;
+  width: 65%;
+  /* height: 45px;
+  padding: 0px auto 0pc auto; */
+  /* font-size: 18px; */
   /* margin-bottom: 16px; */
 
   &:focus {
@@ -177,21 +192,22 @@ export default {
 }
 
 .input-button {
-  border-top: 2px;
+  border-radius: 0;
+  border: 0;
   width: 25%;
-  height: 45px;
   padding: 0px auto 0pc auto;
 }
 
 .shopping-item {
-  font-size: 24px;
+  font-size: 16px;
+  font-weight: bold;
   text-align: left;
-  margin-bottom: 12px;
+  height: 35px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border: 1px solid red;
-  padding-inline: 10px;
+  padding-inline: 20px;
 }
 
 .in-cart {

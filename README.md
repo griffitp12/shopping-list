@@ -2,9 +2,9 @@ This app was created during my time as a student at Code Chrysalis
 
 # Shopping List -  a simple, fullstack shopping list tool.
 
-**Shopping List** does everything you might want a shopping list to do and little else. You can add items to your shopping list persistently (i.e. they are saved to a database and available to you the next time you open the app). You can cross off items when they are poppd into your groceery cart, and you can delete items. 
+**Shopping List** does everything you might want a shopping list to do and little else. You can add items to your shopping list persistently (i.e. they are saved to a database and available to you the next time you open the app). You can cross off items when they are popped into your grocery cart, and you can delete items. 
 
-Note: **Shopping List** was built with mobile users in mind, and probably looks quite silly on a desktop.
+Note: **Shopping List** was built with mobile users in mind, and probably looks quite silly on your desktop.
 
 ## Built With
 
